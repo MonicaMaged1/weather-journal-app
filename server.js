@@ -19,13 +19,10 @@ app.use(express.static('website'));
 
 // Setup Server
 const port = 3300;
-app.listen(port, ()=> {
+app.listen(port, () => {
     console.log("Listening on port " + port);
 })
-//GET route for projectData
-app.get('/all', function (req, res) {
-    res.send(projectData);
-})
+
 //POST route for inserting data to projectData
 app.post('/addEntry', function (req, res) {
     newEntry = {
@@ -42,6 +39,9 @@ app.post('/addEntry', function (req, res) {
     // projectData.userResponse = req.body.userResponse;
     // console.log(projectData);
 
-  });
-  
-  
+});
+
+//GET route for projectData
+app.get('/all', function (req, res) {
+    res.send(projectData);
+})

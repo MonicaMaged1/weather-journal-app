@@ -25,7 +25,7 @@ generateBtn.addEventListener("click", () => {
                 date: newDate,
                 userResponse: feelings
             })
-        }).then(updateUI());
+        }).then(() => updateUI());
     }
 });
 
@@ -66,19 +66,19 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-const updateUI = async ()=>{
-    const request = await fetch('/all');
-  try{
-    const allData = await request.json();
-    console.log("allData");
-    console.log(allData);
-    document.getElementById('date').innerHTML = allData[allData.length - 1].date;
-    document.getElementById('temp').innerHTML = allData[allData.length - 1].temp;
-    document.getElementById('content').innerHTML = allData[allData.length - 1].userResponse;
+const updateUI = async () => {
+    const request = await fetch('/all',);
+    try {
+        const allData = await request.json();
+        console.log("allData");
+        console.log(allData);
+        document.getElementById('date').innerHTML = allData[allData.length - 1].date;
+        document.getElementById('temp').innerHTML = allData[allData.length - 1].temp;
+        document.getElementById('content').innerHTML = allData[allData.length - 1].userResponse;
 
-  }catch(error){
-    console.log("error", error);
-  }
+    } catch (error) {
+        console.log("error", error);
+    }
 
 }
 
