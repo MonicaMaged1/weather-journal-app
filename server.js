@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+projectData = [];
 const bodyParser = require('body-parser');
 // Require Express to run server and routes
 const express = require('express');
@@ -23,19 +23,25 @@ app.listen(port, ()=> {
     console.log("Listening on port " + port);
 })
 //GET route for projectData
-app.get('/', function (req, res) {
+app.get('/all', function (req, res) {
     res.send(projectData);
 })
 //POST route for inserting data to projectData
 app.post('/addEntry', function (req, res) {
-    //res.send('POST received')
-    newEnty = {
-        key: req.body.key,
+    newEntry = {
         temp: req.body.temp,
         date: req.body.date,
         userResponse: req.body.userResponse
     }
-    projectData.push(newEnty);
-  })
+    projectData.push(newEntry);
+    res.send(newEntry);
+    console.log(projectData);
+    // console.log(projectData);
+    // projectData.temp =  req.body.temp;
+    // projectData.date = req.body.date;
+    // projectData.userResponse = req.body.userResponse;
+    // console.log(projectData);
+
+  });
   
   
