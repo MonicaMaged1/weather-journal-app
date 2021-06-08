@@ -11,13 +11,13 @@ const feelingsText = document.getElementById("feelings");
 
 //Event listener when user clicks on the "Generate" button
 generateBtn.addEventListener("click", () => {
+    //Allert user if they didn't enter a zip code
     if (zipText.value.length == 0) {
         alert('Please, enter a zip code.');
     }
     else {
         const zipCode = zipText.value;
         const feelings = feelingsText.value;
-        console.log(baseURL);
         getData(zipCode).then((data) => {
             postData('/addEntry', {
                 temp: data.main.temp,
@@ -34,7 +34,6 @@ const getData = async (zip) => {
     const res = await fetch(baseURL + zip + apiKey);
     try {
         const data = await res.json();
-        console.log(data);
         return data;
     }
     catch (error) {
@@ -43,21 +42,16 @@ const getData = async (zip) => {
 }
 
 const postData = async (url = '', data = {}) => {
-    console.log("post data");
-    console.log(data);
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
-        },
-        // Body data type must match "Content-Type" header        
+        },       
         body: JSON.stringify(data),
     })
     try {
         const newData = await response.json();
-        console.log("newData");
-        console.log(newData);
         return newData;
     } catch (error) {
         console.log("error", error);
@@ -71,7 +65,7 @@ const updateUI = async () => {
         console.log("allData");
         console.log(allData);
         document.getElementById('date').innerHTML = "Date: " + allData[allData.length - 1].date;
-        document.getElementById('temp').innerHTML = "Temperature: " + allData[allData.length - 1].temp;
+        document.getElementById('temp').innerHTML = "Temperature: " + allData[allData.length - 1].temp + "°F";
         document.getElementById('content').innerHTML = "Feelings: " + allData[allData.length - 1].userResponse;
 
     } catch (error) {
