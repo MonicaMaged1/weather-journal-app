@@ -7,6 +7,7 @@ const express = require('express');
 const app = express();
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
+//(body-parser failed to work as it is deprecated)
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -32,6 +33,7 @@ app.post('/addEntry', function (req, res) {
     }
     projectData.push(newEntry);
     res.send(newEntry);
+    // res.end();
     console.log(projectData);
     // console.log(projectData);
     // projectData.temp =  req.body.temp;
